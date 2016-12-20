@@ -14,7 +14,6 @@ Include `wcjs-keybindings` in your project's dependency list, run `npm install`,
 
 ```
 require('wcjs-keybindings').getController(wcjsPlayerInstance);
-
 ``` 
 
 ## Default Keybindings
