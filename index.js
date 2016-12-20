@@ -12,7 +12,7 @@ function WCJS_Controller(player, keyBindings) {
 
 	this.init = function(player, keyBindings) {
 		this.player 		= player;
-		this.keyBindings 	= keyBindings;
+		this.keyBindings 	= keyBindings || {};
 		document.addEventListener('keydown', this.handleKeyDown.bind(this));
 	}
 

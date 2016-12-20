@@ -25,5 +25,19 @@ require('wcjs-keybindings').getController(wcjsPlayerInstance);
 - **Up Arrow**: increase volume by 5%
 - **Down Arrow**: decrease volume by 5%
 
-> ### Note
-> Custom keybindings are coming soon!
+## Custom keybindings
+
+To include custom keybindings, you can pass an object as second argument to the constructor. This object must have the desired keycodes as keys and function definitions as values.
+Within the scope of these handler functions, you can use `this` to refer to the controller, and `this.player` to refer to the instance of wcjs-player handler by the controller.
+Here is an example to toggle fullscreen mode upon pressing <kbd>F</kbd>
+
+```
+var keyBindings = {
+	70 : function() {
+		this.player.toggleFullscreen();
+	}
+};
+
+require('wcjs-keybindings').getController(wcjsPlayerInstance, keyBindings)
+```
+
