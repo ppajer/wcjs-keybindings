@@ -1,5 +1,5 @@
 
-function WCJS_Controller(player) {
+function WCJS_Controller(player, keyBindings) {
 
 	this.keyCodes = {
 			spacebar	: 32,
@@ -10,32 +10,49 @@ function WCJS_Controller(player) {
 			escape		: 27
 		};
 
-	this.init = function(player) {
-		this.player = player;
-		document.addEventHandler('keydown', this.handleKeyDown.bind(this));
+	this.init = function(player, keyBindings) {
+		this.player 		= player;
+		this.keyBindings 	= keyBindings;
+		document.addEventListener('keydown', this.handleKeyDown.bind(this));
 	}
 
+	this.getBoundCommand = function(keycode) {
+
+		if (typeof this.keyBindings[keycode] === 'function') {
+
+			this.keyBindings[keycode].bind(this).call();
+			return true;
+		
+		} else {
+
+			return false;
+		}
+	}
 
 	this.handleKeyDown = function(e) {
-		switch (e.which) {
-			case this.keyCodes.spacebar:
-				this.startOrPause();
+
+		if (!this.getBoundCommand(e.which)) {
+
+			switch (e.which) {
+				case this.keyCodes.spacebar:
+					this.startOrPause();
+					break;
+				case this.keyCodes.leftArrow:
+					this.changePlaybackTime(-5000);
+					break;
+				case this.keyCodes.rightArrow:
+					this.changePlaybackTime(5000);
+					break;
+				case this.keyCodes.downArrow:
+					this.changeVolume(-10);
+					break;
+				case this.keyCodes.upArrow:
+					this.changeVolume(10);
+					break;
+				default:
+					return;
 				break;
-			case this.keyCodes.leftArrow:
-				this.changePlaybackTime(-5000);
-				break;
-			case this.keyCodes.rightArrow:
-				this.changePlaybackTime(5000);
-				break;
-			case this.keyCodes.downArrow:
-				this.changeVolume(-10);
-				break;
-			case this.keyCodes.upArrow:
-				this.changeVolume(10);
-				break;
-			default:
-				return;
-			break;
+			}
 		}
 	}
 
@@ -53,9 +70,9 @@ function WCJS_Controller(player) {
 		this.player.time(newTime);
 	}
 
-	this.init(player);
+	this.init(player, keyBindings);
 }
 
-module.exports.getController = function(player) {
-	return new WCJS_Controller(player);
+module.exports.getController = function(player, keyBindings) {
+	return new WCJS_Controller(player, keyBindings);
 }
