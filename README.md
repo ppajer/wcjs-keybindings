@@ -4,9 +4,7 @@ Keyboard shortcuts for wcjs-player, the node implementation of webchimera.js, wh
 Simply `require` and pass it an instance of wcjs-player to bring a keyboard powered, more desktop-like experience to your users. It is tiny, lightweight,
 concise and has no external dependencies at all!
 
-> ### Note
-> The module was first created for the Electron runtime and its webkit container, so currently only supports browsers that adhere to the standard implementation of `document.addEventListener`.
-> Cross-browser support for web implementation is coming soon.
+*This module is fully cross-browser compatible.*
 
 ## How to use
 

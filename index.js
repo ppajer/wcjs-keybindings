@@ -13,7 +13,19 @@ function WCJS_Controller(player, keyBindings) {
 	this.init = function(player, keyBindings) {
 		this.player 		= player;
 		this.keyBindings 	= keyBindings || {};
-		document.addEventListener('keydown', this.handleKeyDown.bind(this));
+		this.addEventHandlers();
+	}
+
+	this.addEventHandlers = function() {
+
+		if (document.addEventListener) {
+
+			document.addEventListener('keydown', this.handleKeyDown.bind(this), true);
+		
+		} else {
+
+			document.attachEvent('onkeydown', this.handleKeyDown.bind(this));
+		}
 	}
 
 	this.getBoundCommand = function(keycode) {
