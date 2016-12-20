@@ -1,6 +1,6 @@
 {
   "name": "wcjs-keybindings",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Keyboard shortcuts for wcjs-player, the node implementation of webchimera.js",
   "main": "index.js",
   "scripts": {
